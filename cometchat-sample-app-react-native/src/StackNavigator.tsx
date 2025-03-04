@@ -25,6 +25,7 @@ import CallLogParticipants from "./components/callLogs/CometChatParticipants";
 import CallLogRecordings from "./components/callLogs/CometChatCallLogRecordings";
 import CallLogHistory from "./components/callLogs/CometChatCallLogHistory";
 import SchedulerBubble from "./components/shared/SchedulerBubble";
+import { DateChecker } from './components/dateChecker/DateChecker';
 
 function StackNavigator(props) {
   const Stack = createStackNavigator();
@@ -90,6 +91,7 @@ function StackNavigator(props) {
         <Stack.Screen name="FormBubble" component={FormBubble} />
         <Stack.Screen name="CardBubble" component={CardBubble} />
         <Stack.Screen name="SchedulerBubble" component={SchedulerBubble} />
+        <Stack.Screen name="DateChecker" component={DateChecker} />
       </Stack.Navigator>
     </NavigationContainer>
   );

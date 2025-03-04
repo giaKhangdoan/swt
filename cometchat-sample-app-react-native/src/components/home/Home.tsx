@@ -5,6 +5,7 @@ import { AppStyle } from "../../AppStyle";
 import { CardView } from "../../components/common/CardView"
 import { Logout } from '../../resources';
 import { UserContext } from "../../../UserContext";
+import { styles } from "./styles";
 
 const UiKitModules = [
     {
@@ -34,6 +35,11 @@ const UiKitModules = [
     },
     {name: "Shared",
         info: "Share module contains several resuable components that are devided into Primary, Secondary and SDKderived components. To learn more about these components click here.",
+    },
+    {
+        name: "DateChecker",
+        info: "Kiểm tra và so sánh ngày tháng",
+        id: "DateChecker"
     },
 ];
 
@@ -82,6 +88,13 @@ export const Home = ({ navigation }) => {
             })
     }, []);
 
+    const menuItems = [
+        {
+            title: "Kiểm tra ngày tháng",
+            onPress: () => navigation.navigate('DateChecker')
+        },
+    ];
+
     return (
         <View style={AppStyle.container}>
             <View style={[AppStyle.row, AppStyle.center, { justifyContent: 'space-between', margin: 8 }]}>
@@ -105,6 +118,15 @@ export const Home = ({ navigation }) => {
                         />
                     )
                 }
+                {menuItems.map((item, index) => (
+                    <TouchableOpacity 
+                        key={index}
+                        style={styles.menuItem}
+                        onPress={item.onPress}
+                    >
+                        <Text style={styles.menuItemText}>{item.title}</Text>
+                    </TouchableOpacity>
+                ))}
             </ScrollView>
         </View>
     )
