@@ -1,0 +1,109 @@
+HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY E2E TEST
+
+1. Cài đặt Cypress
+-------------------
+npm install cypress --save-dev
+
+2. Cấu trúc thư mục
+-------------------
+project_root/
+  ├── cypress/
+  │   ├── e2e/
+  │   │   ├── auth.cy.js            (Test đăng nhập)
+  │   │   ├── foetus-tracking.cy.js (Test theo dõi thai nhi)
+  │   │   ├── calendar.cy.js        (Test lịch)
+  │   │   └── doctor-notes.cy.js    (Test ghi chú bác sĩ)
+  │   ├── fixtures/
+  │   │   └── test-image.jpg        (File ảnh test)
+  │   └── support/
+  │       ├── commands.js           (Custom commands)
+  │       └── e2e.js               (File cấu hình)
+
+3. Tạo file ảnh test
+-------------------
+- Tạo thư mục cypress/fixtures nếu chưa có
+- Thêm một file ảnh bất kỳ và đổi tên thành test-image.jpg
+
+4. Cấu hình Cypress
+-------------------
+// cypress.config.js
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: "http://localhost:5174",
+    defaultCommandTimeout: 30000,
+    setupNodeEvents(on, config) {},
+  },
+});
+
+5. Thêm Custom Commands
+-------------------
+// cypress/support/commands.js
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit('/login')
+  cy.get('input[type="text"]').first().clear().type(username)
+  cy.get('input[type="password"]').first().clear().type(password)
+  cy.get('button[type="submit"]').click()
+  cy.wait(5000)
+})
+
+6. Chạy Tests
+-------------------
+# Mở Cypress Test Runner (GUI)
+npx cypress open
+
+# Chạy tất cả tests (Headless)
+npx cypress run
+
+# Chạy một file test cụ thể
+npx cypress run --spec "cypress/e2e/auth.cy.js"
+
+7. Tài khoản Test
+-------------------
+Username: vip2
+Password: vip123
+
+8. Lưu ý quan trọng
+-------------------
+- Đảm bảo server đang chạy (http://localhost:5174)
+- Tăng timeout nếu server phản hồi chậm
+- Kiểm tra đường dẫn trong baseUrl trùng với server
+- Đảm bảo tài khoản test còn hiệu lực
+
+9. Xử lý lỗi thường gặp
+-------------------
+a) Timeout errors:
+   - Tăng defaultCommandTimeout trong cypress.config.js
+   - Thêm cy.wait() sau các hành động quan trọng
+
+b) Element not found:
+   - Kiểm tra lại selectors
+   - Thêm .should('be.visible') trước khi tương tác
+   - Sử dụng { force: true } nếu cần
+
+c) Network errors:
+   - Kiểm tra server đang chạy
+   - Kiểm tra baseUrl đúng
+   - Đảm bảo không có CORS issues
+
+10. Cấu trúc test cơ bản
+-------------------
+describe('Test Suite Name', () => {
+  beforeEach(() => {
+    cy.login('vip2', 'vip123')
+    cy.visit('/path')
+    cy.wait(5000)
+  })
+
+  it('Test Case Name', () => {
+    // Test steps
+  })
+})
+
+11. Chạy test theo thứ tự
+-------------------
+1. auth.cy.js (Đăng nhập)
+2. foetus-tracking.cy.js (Theo dõi thai nhi)
+3. calendar.cy.js (Lịch)
+4. doctor-notes.cy.js (Ghi chú bác sĩ) 

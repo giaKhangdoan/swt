@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+$primary-color: #ff6b81;
+$secondary-color: #ffdde1;
+$text-color: #2f3542;
+$background-color: #f8f9fa;
+$border-color: #e9ecef;
+
+.calendar-container {
+  font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $background-color;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: $primary-color;
+      margin: 0;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+
+      .history-btn,
+      .add-event-btn {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        svg {
+          margin-right: 0.5rem;
+        }
+      }
+
+      .history-btn {
+        background-color: $secondary-color;
+        color: $text-color;
+
+        &:hover {
+          background-color: darken($secondary-color, 5%);
+        }
+      }
+
+      .add-event-btn {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  .calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: $primary-color;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: darken($primary-color, 15%);
+      }
+    }
+
+    .current-month {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $text-color;
+    }
+  }
+
+  .calendar-tools {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      svg {
+        color: $primary-color;
+        margin-right: 0.5rem;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        color: $text-color;
+      }
+    }
+
+    .category-filter {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid $border-color;
+      font-size: 1rem;
+      color: $text-color;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+
+    .calendar-day-header {
+      text-align: center;
+      font-weight: 500;
+      color: $text-color;
+      padding: 0.5rem;
+    }
+
+    .calendar-day {
+      background-color: white;
+      border-radius: 10px;
+      padding: 0.5rem;
+      min-height: 100px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      &.empty {
+        background-color: transparent;
+        box-shadow: none;
+      }
+
+      &.today {
+        border: 2px solid $primary-color;
+      }
+
+      .day-number {
+        font-size: 0.9rem;
+        color: $text-color;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .day-events {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-top: 4px;
+        max-height: 80px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 2px;
+        }
+      }
+
+      .event-pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: white;
+        text-decoration: none;
+        background-color: #4ECDC4;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.02);
+          filter: brightness(1.1);
+        }
+
+        .event-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 16px;
+          
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        .event-title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          flex: 1;
+        }
+      }
+
+      // Thêm style cho các loại reminder khác nhau
+      .event-pill.Uống-thuốc {
+        background-color: #4ECDC4;
+      }
+
+      .event-pill.Cuộc-hẹn-bác-sĩ {
+        background-color: #FF6B6B;
+      }
+
+      .event-pill.Khám-thai {
+        background-color: #45B7D1;
+      }
+
+      .event-pill.Tập-thể-dục {
+        background-color: #FFA07A;
+      }
+
+      .event-pill.Dinh-dưỡng {
+        background-color: #98D8C8;
+      }
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+      h2 {
+        color: $primary-color;
+        margin-bottom: 1.5rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        input,
+        select,
+        textarea {
+          padding: 0.75rem;
+          border-radius: 10px;
+          border: 1px solid $border-color;
+          font-size: 1rem;
+          color: $text-color;
+          transition: all 0.3s ease;
+
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+          }
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+
+        .modal-actions {
+          display: flex;
+          justify-content: flex-end;
+          gap: 1rem;
+          margin-top: 1rem;
+
+          button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:first-child {
+              background-color: $border-color;
+              color: $text-color;
+
+              &:hover {
+                background-color: darken($border-color, 5%);
+              }
+            }
+
+            &:last-child {
+              background-color: $primary-color;
+              color: white;
+
+              &:hover {
+                background-color: darken($primary-color, 10%);
+              }
+            }
+          }
+        }
+      }
+
+      select {
+        option {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 1rem;
+
+    .calendar-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    .calendar-tools {
+      flex-direction: column;
+      gap: 1rem;
+
+      .search-box,
+      .category-filter {
+        width: 100%;
+      }
+    }
+
+    .calendar-grid {
+      gap: 0.5rem;
+
+      .calendar-day {
+        min-height: 80px;
+        font-size: 0.8rem;
+
+        .event-pill {
+          padding: 2px 4px;
+          font-size: 10px;
+
+          .event-icon svg {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+

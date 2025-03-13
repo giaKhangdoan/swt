@@ -1,0 +1,120 @@
+HƯỚNG DẪN CÀI ĐẶT VÀ TEST DỰ ÁN PREGNANCY GROWTH TRACKING
+
+1. Yêu cầu hệ thống:
+- Node.js phiên bản 16.x trở lên
+- npm phiên bản 8.x trở lên
+- Windows 10 trở lên hoặc macOS/Linux
+
+2. Các bước cài đặt:
+
+a. Clone dự án:
+```bash
+git clone [đường dẫn repository]
+cd PregnancyGrowthTracking.FE
+```
+
+b. Cài đặt dependencies:
+```bash
+npm install
+```
+
+3. Cấu hình môi trường:
+
+a. Tạo file .env trong thư mục gốc với nội dung:
+```
+VITE_API_URL=http://localhost:8080/api
+```
+
+4. Chạy ứng dụng để phát triển:
+```bash
+npm run dev
+```
+- Ứng dụng sẽ chạy tại: http://localhost:5173
+
+5. Build ứng dụng cho production:
+```bash
+npm run build
+```
+
+6. Chạy tests:
+
+a. Chạy toàn bộ tests:
+```bash
+npm test
+```
+
+b. Chạy tests với coverage:
+```bash
+npm test -- --coverage
+```
+
+c. Chạy một file test cụ thể:
+```bash
+npm test -- src/__tests__/api/services/foetusService.test.js
+```
+
+7. Cấu trúc thư mục tests:
+```
+src/
+  __tests__/
+    api/
+      config/         - Tests cho cấu hình API
+      services/       - Tests cho các services
+    components/       - Tests cho components
+    utils/           - Tests cho utilities
+```
+
+8. Quy tắc viết tests:
+
+a. Mỗi service cần test các trường hợp:
+- Thành công: kiểm tra kết quả trả về đúng định dạng
+- Thất bại: kiểm tra xử lý lỗi phù hợp
+- Validation: kiểm tra các ràng buộc đầu vào
+
+b. Cấu trúc file test:
+```javascript
+describe('Tên service/component', () => {
+  beforeAll(() => {
+    // Setup chung
+  });
+
+  beforeEach(() => {
+    // Reset trước mỗi test
+  });
+
+  describe('Tên function/method', () => {
+    it('should do something', async () => {
+      // Test case
+    });
+  });
+});
+```
+
+9. Xử lý lỗi phổ biến:
+
+a. Jest không được định nghĩa:
+- Thêm "jest" vào globals trong file .eslintrc.js:
+```javascript
+module.exports = {
+  globals: {
+    jest: true
+  }
+}
+```
+
+b. Lỗi về localStorage trong tests:
+- Đã được mock sẵn trong setup, không cần thêm gì
+
+c. Lỗi về axios trong tests:
+- Đã được mock trong mỗi file test
+- Sử dụng axiosConfig.get/post/put/delete.mockResolvedValueOnce() để mock response
+
+10. Tips:
+- Luôn chạy tests trước khi commit code
+- Kiểm tra coverage để đảm bảo test đầy đủ
+- Sử dụng try-catch để test các trường hợp lỗi
+- Mock dữ liệu càng gần với thực tế càng tốt
+
+11. Liên hệ hỗ trợ:
+- Email: [khangdgse184442@fpt.edu.vn]
+- Discord: [link discord] 
