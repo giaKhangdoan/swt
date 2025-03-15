@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
+
+// Variables
+$primary-color: #ff6b81;
+$accent-color: #70a1ff;
+$text-color: #2f3542;
+$background: #f8f9fa;
+$secondary-color: #ffdde1;
+
+// Reset styles
+body.member-page {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    135deg,
+    rgba($background, 0.95),
+    rgba($secondary-color, 0.85)
+  );
+  min-height: 100vh;
+  padding-top: 0 !important;
+  overflow-x: hidden; // Ngăn cuộn ngang
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+.member-container {
+  position: relative; // Thêm position relative
+  padding-top: 70px;
+  margin: 0;
+  min-height: calc(100vh - 70px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden; // Ngăn overflow từ container chính
+
+  > * {
+    margin: 0 !important;
+    padding: 0 1.5rem !important;
+  }
+
+  // Thêm hiệu ứng sóng nước
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba($background, 0.95),
+      rgba($secondary-color, 0.85)
+    );
+    z-index: -2;
+  }
+
+  // Wave background
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 20% 35%,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+      ),
+      radial-gradient(
+        circle at 75% 65%,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+      );
+  }
+}
+
+// Wave background
+.member-waves {
+  position: fixed; // Thay đổi thành fixed
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // Cho phép click xuyên qua
+  z-index: -1;
+  overflow: hidden; // Ngăn overflow từ waves
+
+  .wave {
+    position: absolute;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 43%;
+    transform-origin: center;
+    animation: waterWave 15s infinite linear;
+
+    &:nth-child(1) {
+      top: -50%;
+      animation-duration: 20s;
+    }
+    &:nth-child(2) {
+      top: -55%;
+      animation-delay: -5s;
+      animation-duration: 17s;
+    }
+    &:nth-child(3) {
+      top: -60%;
+      animation-delay: -8s;
+      animation-duration: 15s;
+    }
+  }
+}
+
+@keyframes waterWave {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -2%) rotate(180deg);
+  }
+  100% {
+    transform: translate(-50%, 0) rotate(360deg);
+  }
+}
+
+// Component styles
+.pregnancy-timeline,
+.foetus-list,
+.notes-list,
+.blog-slide-member {
+  margin: 0 !important;
+  padding: 1rem !important;
+  width: 100%;
+}
+
+.home-member-container {
+  margin-top: 0 !important;
+  width: 100%;
+}
+
+.pregnancy-timeline {
+  margin-top: 0 !important;
+  padding-top: 1rem !important;
+
+  h2 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .timeline-note {
+    margin-top: 1rem !important;
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .member-container {
+    padding-top: 60px;
+  }
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+p,
+span,
+div {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}

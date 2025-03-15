@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap");
+
+// Variables
+$primary-color: #ffd1dc;
+$primary-light: #ffecf1;
+$primary-dark: #ffb6c1;
+$text-color: #5a5a5a;
+$error-color: #ff6b81;
+$white: #ffffff;
+$input-bg: #f0f8ff;
+$shadow-color: rgba(0, 0, 0, 0.05);
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: $text-color;
+  background-color: $primary-light;
+}
+
+// Main container
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, $primary-light, $white);
+  position: relative;
+  overflow: hidden;
+
+  // Background decorative elements
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba($primary-color, 0.1);
+    z-index: 0;
+  }
+
+  &::before {
+    top: -100px;
+    right: -100px;
+  }
+
+  &::after {
+    bottom: -100px;
+    left: -100px;
+  }
+}
+
+// Decorative elements
+.leaves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+
+  .leaf {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba($primary-color, 0.2);
+    border-radius: 50%;
+
+    @for $i from 1 through 15 {
+      &:nth-child(#{$i}) {
+        top: random(100) * 1%;
+        left: random(100) * 1%;
+        opacity: (random(5) + 2) * 0.1;
+        transform: scale(random(10) * 0.1 + 0.5);
+      }
+    }
+  }
+}
+
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  z-index: 0;
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath fill='%23FFD1DC' fill-opacity='0.1' d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25'%3E%3C/path%3E%3Cpath fill='%23FFD1DC' fill-opacity='0.1' d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5'%3E%3C/path%3E%3Cpath fill='%23FFD1DC' fill-opacity='0.1' d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' opacity='.75'%3E%3C/path%3E%3C/svg%3E")
+      no-repeat;
+    background-size: cover;
+  }
+}
+
+.waterfall {
+  display: none; // Hidden for cleaner design
+}
+
+// Login box
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  background-color: $white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px $shadow-color;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .login-header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $text-color;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+
+  form {
+    padding: 1.5rem 2rem 2rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: $text-color;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba($primary-color, 0.3);
+        border-radius: 8px;
+        background-color: $input-bg;
+        color: $text-color;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+        }
+
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .error-message {
+      background-color: rgba($error-color, 0.1);
+      color: $error-color;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-actions {
+      text-align: right;
+      margin-bottom: 1.5rem;
+
+      .forgot-password {
+        font-size: 0.9rem;
+        color: $text-color;
+        text-decoration: none;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: $primary-color;
+      color: $text-color;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba($white, 0.3);
+        border-radius: 50%;
+        border-top-color: $white;
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .register-prompt {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+
+      .register-link {
+        color: darken($primary-color, 10%);
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .btn-back {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: transparent;
+      border: 1px solid $primary-color;
+      color: $text-color;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Media queries
+@media (max-width: 480px) {
+  .login-box {
+    max-width: 90%;
+
+    .login-header {
+      padding: 1.5rem 1rem 0.5rem;
+
+      h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    form {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+  }
+}

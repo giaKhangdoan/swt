@@ -1,0 +1,627 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+// Variables - đồng bộ màu sắc với CalendarAll
+$primary-color: #ff6b81;
+$secondary-color: #ffdde1;
+$light-pink: #fff5f7;
+$white: #ffffff;
+$shadow-color: rgba($primary-color, 0.15);
+$text-shadow: 0 1px 2px rgba($primary-color, 0.2);
+$text-dark: #333333;
+$text-medium: #666666;
+
+// Animation Keyframes - thêm nhiều hiệu ứng
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.doctor-notes-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $white;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px $shadow-color;
+  animation: fadeIn 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+
+  // Thêm hiệu ứng nền
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba($light-pink, 0.3) 0%,
+      rgba($white, 0) 70%
+    );
+    z-index: 0;
+    animation: rotate 60s linear infinite;
+    pointer-events: none;
+  }
+
+  .page-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2.8rem;
+    color: $primary-color;
+    margin: 0 0 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-align: center;
+    text-shadow: $text-shadow;
+    animation: float 6s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      margin: 12px auto 0;
+      background: linear-gradient(90deg, $primary-color, $secondary-color);
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba($primary-color, 0.3);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    // Thêm hiệu ứng shimmer
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba($white, 0) 0%,
+        rgba($white, 0.8) 50%,
+        rgba($white, 0) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+      z-index: -1;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+
+    .add-note-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      background: linear-gradient(
+        135deg,
+        $primary-color,
+        darken($primary-color, 10%)
+      );
+      color: $white;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      font-family: "Montserrat", sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 10px rgba($primary-color, 0.3);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          rgba($white, 0) 0%,
+          rgba($white, 0.3) 50%,
+          rgba($white, 0) 100%
+        );
+        animation: wave 2s infinite;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+      }
+    }
+  }
+
+  .notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+
+    .note-item {
+      background: $white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 15px rgba($primary-color, 0.08);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba($primary-color, 0.05);
+      animation: slideUp 0.5s ease-out;
+      position: relative;
+      overflow: hidden;
+
+      // Thêm hiệu ứng gradient border
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, $primary-color, $secondary-color);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 12px 30px rgba($primary-color, 0.15);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      .note-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba($primary-color, 0.1);
+
+        .note-info {
+          .note-hospital {
+            display: block;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            color: $primary-color;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+          }
+
+          .note-date {
+            font-size: 0.9rem;
+            color: lighten($primary-color, 20%);
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            background-color: $light-pink;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba($primary-color, 0.1);
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 8px rgba($primary-color, 0.2);
+            }
+          }
+        }
+
+        .note-actions {
+          display: flex;
+          gap: 0.5rem;
+
+          button {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &.edit-btn {
+              color: $primary-color;
+              &:hover {
+                background: rgba($primary-color, 0.1);
+                transform: translateY(-2px) rotate(15deg);
+              }
+            }
+
+            &.delete-btn {
+              color: darken($primary-color, 10%);
+              &:hover {
+                background: rgba($primary-color, 0.1);
+                transform: translateY(-2px) rotate(-15deg);
+              }
+            }
+          }
+        }
+      }
+
+      .note-content {
+        .diagnosis,
+        .detail {
+          margin-bottom: 0.75rem;
+          color: $text-dark;
+          line-height: 1.6;
+          font-family: "Poppins", sans-serif;
+          letter-spacing: 0.3px;
+
+          strong {
+            font-family: "Montserrat", sans-serif;
+            color: $primary-color;
+            font-weight: 600;
+            border-left: 3px solid $primary-color;
+            padding-left: 0.5rem;
+            margin-right: 0.25rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+              padding-left: 0.75rem;
+              letter-spacing: 0.5px;
+            }
+          }
+        }
+
+        .note-image {
+          margin-top: 1rem;
+          position: relative;
+          overflow: hidden;
+          border-radius: 10px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba($primary-color, 0);
+            transition: all 0.3s ease;
+            z-index: 1;
+          }
+
+          img {
+            width: 100%;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba($primary-color, 0.1);
+
+            &:hover {
+              transform: scale(1.05);
+              box-shadow: 0 8px 20px rgba($primary-color, 0.2);
+            }
+          }
+
+          &:hover::before {
+            background: rgba($primary-color, 0.1);
+          }
+        }
+      }
+    }
+  }
+
+  // Modal styles - đồng bộ với CalendarAll
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($primary-color, 0.15);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+
+    .modal-content {
+      background: $white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba($primary-color, 0.25);
+      animation: slideUp 0.5s ease-out;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, $primary-color, $secondary-color);
+      }
+
+      h2 {
+        font-family: "Playfair Display", serif;
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 80px;
+          height: 4px;
+          margin: 0.75rem auto 0;
+          background: linear-gradient(90deg, $primary-color, $secondary-color);
+          border-radius: 2px;
+          animation: pulse 3s ease-in-out infinite;
+        }
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        .form-group {
+          margin-bottom: 1rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-3px);
+          }
+
+          label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: $primary-color;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: "Montserrat", sans-serif;
+            letter-spacing: 0.5px;
+          }
+
+          input,
+          textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border-radius: 15px;
+            border: 2px solid $light-pink;
+            font-size: 1rem;
+            color: $text-dark;
+            background: $white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 10px rgba($primary-color, 0.05);
+            font-family: "Poppins", sans-serif;
+
+            &:focus {
+              outline: none;
+              border-color: $primary-color;
+              box-shadow: 0 8px 20px rgba($primary-color, 0.15);
+              transform: translateY(-3px);
+            }
+
+            &::placeholder {
+              color: rgba($primary-color, 0.5);
+              font-weight: 400;
+              font-style: italic;
+            }
+          }
+
+          textarea {
+            min-height: 120px;
+            resize: vertical;
+          }
+        }
+
+        .form-actions {
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+
+          button {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.5px;
+            font-family: "Montserrat", sans-serif;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(
+                90deg,
+                rgba($white, 0) 0%,
+                rgba($white, 0.3) 50%,
+                rgba($white, 0) 100%
+              );
+              transition: all 0.5s ease;
+            }
+
+            &:hover::before {
+              left: 100%;
+            }
+
+            &[type="submit"] {
+              background: linear-gradient(
+                135deg,
+                $primary-color,
+                darken($primary-color, 10%)
+              );
+              color: $white;
+              border: none;
+              box-shadow: 0 4px 10px rgba($primary-color, 0.3);
+
+              &:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+              }
+            }
+
+            &[type="button"] {
+              background: $light-pink;
+              color: $primary-color;
+              border: 1px solid rgba($primary-color, 0.1);
+
+              &:hover {
+                background: rgba($primary-color, 0.1);
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 20px rgba($primary-color, 0.2);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 1400px) {
+  .doctor-notes-container {
+    .notes-list {
+      grid-template-columns: repeat(3, 1fr); // 3 cột cho màn hình nhỏ hơn
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .doctor-notes-container {
+    .notes-list {
+      grid-template-columns: repeat(2, 1fr); // 2 cột cho tablet
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-notes-container {
+    padding: 1.5rem;
+
+    .page-title {
+      font-size: 2.2rem;
+    }
+
+    .notes-list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .modal-content {
+      padding: 1.5rem;
+      width: 95%;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      form {
+        gap: 1rem;
+
+        .modal-actions {
+          flex-direction: column;
+          gap: 0.75rem;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

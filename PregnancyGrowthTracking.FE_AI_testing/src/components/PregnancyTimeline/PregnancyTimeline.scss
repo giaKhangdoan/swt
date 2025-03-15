@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
+
+// Synchronized color variables - đồng bộ với FoetusList
+$primary-color: #ff6b81;
+$accent-color: #70a1ff;
+$text-color: #2f3542;
+$background: #f8f9fa;
+$secondary-color: #ffdde1;
+
+// Animation Keyframes
+@keyframes waterWave {
+  0% { transform: translate(-50%, 0) rotate(0deg); }
+  50% { transform: translate(-50%, -2%) rotate(180deg); }
+  100% { transform: translate(-50%, 0) rotate(360deg); }
+}
+
+@keyframes flowWave {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pregnancy-timeline {
+  background: linear-gradient(135deg, 
+    rgba($background, 0.95), 
+    rgba($secondary-color, 0.85)
+  );
+  padding: 1.5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  border-radius: 20px;
+  margin-top: 0;
+
+  // Wave background
+  .blog-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+
+    .wave {
+      position: absolute;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 43%;
+      animation: waterWave 15s infinite linear;
+
+      &:nth-child(1) { top: -50%; animation-duration: 20s; }
+      &:nth-child(2) { top: -55%; animation-delay: -5s; animation-duration: 17s; }
+      &:nth-child(3) { top: -60%; animation-delay: -8s; animation-duration: 15s; }
+    }
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    color: $text-color;
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 0 2rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, $primary-color, transparent);
+      margin: 0.5rem auto 0;
+      animation: flowWave 2s infinite linear;
+    }
+  }
+
+  .timeline-note {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin: 0 auto 2rem;
+    max-width: 1400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 3px solid $primary-color;
+
+    p {
+      margin: 0;
+      color: $text-color;
+      font-style: italic;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  }
+
+  .timeline-container-wrapper {
+    position: relative;
+    margin: 2rem 0;
+    padding: 0 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    .scroll-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: $primary-color;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+
+      &:hover {
+        background: darken($primary-color, 10%);
+        transform: translateY(-50%) translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      &.left { left: 0; margin-left: -20px; }
+      &.right { right: 0; margin-right: -20px; }
+    }
+  }
+
+  .timeline-scroll-container {
+    overflow-x: auto;
+    position: relative;
+    padding: 2rem 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($secondary-color, 0.5);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $primary-color;
+      border-radius: 4px;
+    }
+  }
+
+  .timeline-progress-bar {
+    position: relative;
+    height: 4px;
+    background: rgba($secondary-color, 0.5);
+    margin: 0 2rem 2rem;
+    border-radius: 2px;
+
+    .progress-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: $primary-color;
+      border-radius: 2px;
+      width: var(--scroll-progress, 0%);
+      transition: width 0.3s ease;
+    }
+
+    .progress-dot {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: $primary-color;
+      box-shadow: 0 0 0 4px rgba($primary-color, 0.2);
+      z-index: 2;
+
+      &:nth-child(1) { left: 0%; }
+      &:nth-child(2) { left: 16.66%; }
+      &:nth-child(3) { left: 33.33%; }
+      &:nth-child(4) { left: 50%; }
+      &:nth-child(5) { left: 66.66%; }
+      &:nth-child(6) { left: 83.33%; }
+      &:nth-child(7) { left: 100%; }
+    }
+  }
+
+  .timeline-cards {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+
+  .timeline-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    min-width: 350px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    scroll-snap-align: start;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    &.expanded {
+      min-width: 400px;
+
+      .timeline-card-header {
+        background: $primary-color;
+        color: white;
+
+        .period, h3, p {
+          color: white;
+        }
+
+        .expand-icon {
+          color: white;
+        }
+      }
+    }
+
+    .timeline-card-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:hover {
+        background: rgba($secondary-color, 0.5);
+      }
+
+      .header-content {
+        .period {
+          font-family: 'Playfair Display', serif;
+          color: $primary-color;
+          font-size: 1.2rem;
+          font-weight: 600;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        h3 {
+          color: $text-color;
+          font-size: 1.5rem;
+          margin: 0 0 0.5rem;
+          line-height: 1.3;
+        }
+
+        p {
+          color: lighten($text-color, 20%);
+          font-size: 1rem;
+          line-height: 1.6;
+          margin: 0;
+        }
+      }
+
+      .expand-icon {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: $primary-color;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .timeline-card-details {
+      background: white;
+      overflow: hidden;
+      border-top: 1px solid rgba($secondary-color, 0.5);
+
+      .details-section {
+        padding: 1.5rem;
+        border-bottom: 1px solid rgba($secondary-color, 0.3);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        h4 {
+          color: $primary-color;
+          font-size: 1.2rem;
+          margin: 0 0 1rem;
+          font-weight: 600;
+        }
+
+        p {
+          color: $text-color;
+          font-size: 1rem;
+          line-height: 1.6;
+          margin: 0 0 1rem;
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+
+          li {
+            color: $text-color;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0.6rem;
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: $primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 1024px) {
+  .pregnancy-timeline {
+    padding: 1rem;
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    .timeline-card {
+      min-width: 300px;
+      
+      &.expanded {
+        min-width: 350px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .pregnancy-timeline {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .timeline-container-wrapper {
+      padding: 0 2rem;
+    }
+
+    .timeline-cards {
+      gap: 1rem;
+    }
+
+    .timeline-card {
+      min-width: 260px;
+      
+      &.expanded {
+        min-width: 300px;
+      }
+    }
+  }
+}
+

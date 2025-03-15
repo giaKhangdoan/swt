@@ -1,0 +1,1091 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+// Variables
+$primary: #ff6b81;
+$primary-light: #ffdae0;
+$primary-dark: #ff4757;
+$secondary: #ffc2d1;
+$accent: #70a1ff;
+$accent-light: #e0f1ff;
+$success: #2ed573;
+$warning: #ffa502;
+$error: #ff4757;
+$text-primary: #2f3542;
+$text-secondary: #747d8c;
+$background: #fff9f9;
+$white: #ffffff;
+$shadow-color: rgba($primary, 0.15);
+$text-shadow: 0 1px 2px rgba($primary, 0.2);
+
+// Thêm biến màu mới cho các loại cảnh báo
+$alert-info: #70a1ff;
+$alert-warning: #ffb142;
+$alert-danger: #ff6b6b;
+$alert-success: #2ed573;
+
+// Mixins
+@mixin card {
+  background: $white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px $shadow-color;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  border: 1px solid rgba($primary, 0.1);
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin glass-effect {
+  background: rgba($white, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($white, 0.2);
+  box-shadow: 0 8px 32px $shadow-color;
+}
+
+@mixin gradient-text {
+  background: linear-gradient(135deg, $primary, $accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+@mixin input-field {
+  background: $white;
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  color: $text-primary;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba($primary, 0.05);
+  
+  &:focus {
+    outline: none;
+    border-color: $accent;
+    box-shadow: 0 0 0 3px rgba($accent, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  &::placeholder {
+    color: lighten($text-secondary, 15%);
+  }
+}
+
+// Animation Keyframes
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pregnancy-monitor {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $background, lighten($primary-light, 5%));
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(
+      to bottom,
+      rgba($primary-light, 0.3),
+      transparent
+    );
+    z-index: 0;
+  }
+
+  // Header Section
+  .monitor-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.8s ease-out;
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      color: $text-primary;
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem;
+      text-shadow: $text-shadow;
+      position: relative;
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, $primary, $accent);
+        border-radius: 3px;
+        box-shadow: 0 2px 4px $shadow-color;
+      }
+    }
+
+    p {
+      color: $text-secondary;
+      font-size: 1.1rem;
+      margin: 1.2rem 0 0;
+      opacity: 0.9;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+  }
+
+  // Main Content Grid
+  .monitor-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.8s ease-out;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+    }
+
+    // Children Grid
+    .children-grid {
+      display: grid;
+      gap: 1.5rem;
+      align-content: start;
+      animation: slideUp 0.5s ease-out;
+      order: 1;
+
+      .child-card {
+        background: $white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba($primary, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid rgba($primary, 0.08);
+        
+        &.selected {
+          border: 2px solid $primary;
+          box-shadow: 0 8px 25px rgba($primary, 0.15);
+        }
+        
+        &:hover {
+          transform: translateY(-5px);
+        }
+        
+        .card-header {
+          background: linear-gradient(to right, $primary-light, lighten($primary-light, 5%));
+          padding: 1.2rem 1.5rem;
+          border-bottom: 1px solid rgba($primary, 0.1);
+          
+          h3 {
+            font-family: "Playfair Display", serif;
+            color: $text-primary;
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 600;
+          }
+        }
+        
+        .card-content {
+          padding: 1.5rem;
+          
+          // Thiết kế lại phần thông tin cơ bản
+          .basic-info {
+            background: $background;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba($primary, 0.08);
+            
+            .info-title {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-bottom: 1rem;
+              color: $primary;
+              font-weight: 600;
+              font-size: 1rem;
+              
+              svg {
+                font-size: 1.2rem;
+              }
+            }
+            
+            .info-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 1rem;
+              
+              .info-item {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                padding: 0.8rem;
+                background: rgba($white, 0.8);
+                border-radius: 10px;
+                border: 1px solid rgba($primary, 0.1);
+                transition: all 0.3s ease;
+                
+                &:hover {
+                  background: $white;
+                  box-shadow: 0 3px 10px rgba($primary, 0.1);
+                }
+                
+                svg {
+                  color: $primary;
+                }
+                
+                .age-input-container {
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  width: 100%;
+                  
+                  span {
+                    font-weight: 500;
+                    color: $text-secondary;
+                    white-space: nowrap;
+                  }
+                  
+                  input {
+                    @include input-field;
+                    padding: 0.5rem;
+                    text-align: center;
+                    width: 70px;
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+          }
+          
+          // Thiết kế lại phần nhập chỉ số
+          .stats-container {
+            margin-bottom: 1.5rem;
+            
+            .stats-title {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-bottom: 1rem;
+              color: $primary;
+              font-weight: 600;
+              font-size: 1rem;
+              
+              svg {
+                font-size: 1.2rem;
+              }
+            }
+            
+            .stats-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 1rem;
+              
+              .stat-item {
+                background: $white;
+                border-radius: 12px;
+                padding: 1rem;
+                box-shadow: 0 3px 10px rgba($primary, 0.05);
+                border: 1px solid rgba($primary, 0.08);
+                transition: all 0.3s ease;
+                
+                &:hover {
+                  box-shadow: 0 5px 15px rgba($primary, 0.1);
+                  transform: translateY(-3px);
+                }
+                
+                .stat-header {
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  margin-bottom: 0.8rem;
+                  
+                  svg {
+                    color: $primary;
+                    font-size: 1.1rem;
+                  }
+                  
+                  .stat-label {
+                    font-weight: 600;
+                    color: $text-primary;
+                    font-size: 1rem;
+                  }
+                }
+                
+                .stat-input {
+                  position: relative;
+                  
+                  input {
+                    @include input-field;
+                    padding: 0.8rem 1rem;
+                    text-align: center;
+                    font-weight: 500;
+                    font-size: 1rem;
+                  }
+                  
+                  .stat-unit {
+                    position: absolute;
+                    right: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: $text-secondary;
+                    font-size: 0.85rem;
+                    pointer-events: none;
+                  }
+                }
+              }
+            }
+          }
+          
+          // Thiết kế lại phần lịch sử và nút cập nhật
+          .actions-container {
+            .history-section {
+              background: $accent-light;
+              border-radius: 12px;
+              padding: 1.2rem;
+              margin-bottom: 1.5rem;
+              border: 1px solid rgba($accent, 0.2);
+              
+              .last-updated {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: $text-secondary;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                
+                svg {
+                  color: $accent;
+                  font-size: 1rem;
+                }
+              }
+              
+              .view-history-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                width: 100%;
+                padding: 0.8rem;
+                background: rgba($accent, 0.2);
+                color: darken($accent, 10%);
+                border: 1px solid rgba($accent, 0.3);
+                border-radius: 10px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                  background: rgba($accent, 0.3);
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba($accent, 0.2);
+                }
+                
+                svg {
+                  transition: transform 0.3s ease;
+                }
+                
+                &:hover svg {
+                  transform: translateX(-3px);
+                }
+              }
+            }
+            
+            .update-stats-button {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.8rem;
+              padding: 1rem 1.5rem;
+              background: linear-gradient(to right, $primary, darken($primary, 10%));
+              color: white;
+              border: none;
+              border-radius: 12px;
+              font-size: 1rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 15px rgba($primary, 0.2);
+              
+              &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba($primary, 0.3);
+                background: linear-gradient(to right, darken($primary, 5%), darken($primary, 15%));
+              }
+              
+              svg {
+                font-size: 1.2rem;
+              }
+            }
+          }
+          
+          // Thiết kế lại thông báo cảnh báo
+          .warning-message {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem;
+            background: rgba($error, 0.08);
+            color: $error;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba($error, 0.2);
+            
+            svg {
+              color: $error;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+
+    // Chart Section
+    .chart-section {
+      @include card;
+      padding: 1.8rem;
+      background: rgba($white, 0.95);
+      transition: all 0.4s ease;
+      animation: slideUp 0.5s ease-out;
+      order: 2;
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px $shadow-color;
+      }
+
+      .chart-container {
+        margin-bottom: 1.5rem;
+        padding: 1.2rem;
+        background: $white;
+        border-radius: 14px;
+        border: 1px solid rgba($primary, 0.1);
+        box-shadow: 0 5px 15px rgba($primary, 0.05);
+        transition: all 0.3s ease;
+        min-height: 300px;
+        @include flex-center;
+
+        &:hover {
+          box-shadow: 0 8px 20px $shadow-color;
+        }
+
+        &:empty::before {
+          content: "Chọn một thai nhi để xem biểu đồ";
+          color: $text-secondary;
+          font-style: italic;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          font-size: 0.95rem;
+        }
+      }
+
+      .chart-info {
+        margin-top: 0.8rem;
+        padding: 0.5rem;
+
+        .chart-note {
+          color: $text-secondary;
+          font-size: 0.9rem;
+          font-style: italic;
+          margin: 0;
+          text-align: center;
+          letter-spacing: 0.3px;
+        }
+      }
+
+      // Thêm style cho phần alert box dưới biểu đồ
+      .chart-alerts {
+        margin-top: 1.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba($primary, 0.1);
+        box-shadow: 0 3px 10px rgba($primary, 0.05);
+        
+        .alert-header {
+          background: linear-gradient(to right, $primary-light, lighten($primary-light, 5%));
+          padding: 0.8rem 1.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid rgba($primary, 0.1);
+          
+          h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: $text-primary;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            svg {
+              color: $primary;
+            }
+          }
+          
+          .alert-toggle {
+            background: none;
+            border: none;
+            color: $text-secondary;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background: rgba($primary, 0.1);
+              color: $primary;
+            }
+          }
+        }
+        
+        .alert-content {
+          background: $white;
+          padding: 0;
+          max-height: 0;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          
+          &.open {
+            padding: 1.2rem;
+            max-height: 500px;
+            overflow-y: auto;
+          }
+          
+          .alert-item {
+            margin-bottom: 0.8rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            border-left: 3px solid;
+            
+            &:last-child {
+              margin-bottom: 0;
+            }
+            
+            &.info {
+              background: rgba($alert-info, 0.08);
+              border-left-color: $alert-info;
+              
+              .alert-icon {
+                color: $alert-info;
+              }
+            }
+            
+            &.warning {
+              background: rgba($alert-warning, 0.08);
+              border-left-color: $alert-warning;
+              
+              .alert-icon {
+                color: $alert-warning;
+              }
+            }
+            
+            &.danger {
+              background: rgba($alert-danger, 0.08);
+              border-left-color: $alert-danger;
+              
+              .alert-icon {
+                color: $alert-danger;
+              }
+            }
+            
+            &.success {
+              background: rgba($alert-success, 0.08);
+              border-left-color: $alert-success;
+              
+              .alert-icon {
+                color: $alert-success;
+              }
+            }
+            
+            .alert-icon {
+              font-size: 1.2rem;
+              margin-top: 0.2rem;
+            }
+            
+            .alert-text {
+              flex: 1;
+              
+              .alert-title {
+                font-weight: 600;
+                margin: 0 0 0.3rem 0;
+                font-size: 0.95rem;
+                color: $text-primary;
+              }
+              
+              .alert-description {
+                color: $text-secondary;
+                font-size: 0.9rem;
+                margin: 0;
+                line-height: 1.5;
+              }
+            }
+          }
+          
+          .no-alerts {
+            text-align: center;
+            padding: 1.5rem;
+            color: $text-secondary;
+            font-style: italic;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            
+            svg {
+              font-size: 2rem;
+              color: lighten($text-secondary, 20%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Loading spinner
+  .loading-spinner {
+    @include flex-center;
+    min-height: 100vh;
+    background: linear-gradient(
+      135deg,
+      $background,
+      lighten($primary-light, 5%)
+    );
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
+    color: $primary;
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: $text-shadow;
+    animation: fadeIn 0.5s ease-out;
+
+    &::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: $primary;
+      border-bottom-color: $accent;
+      position: absolute;
+      animation: spin 1.2s linear infinite;
+      box-shadow: 0 0 10px $shadow-color;
+    }
+  }
+
+  // Error message
+  .error-message {
+    background: rgba($error, 0.1);
+    color: $error;
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+    border-left: 4px solid $error;
+    box-shadow: 0 5px 15px rgba($error, 0.1);
+    letter-spacing: 0.3px;
+    animation: fadeIn 0.5s ease-out;
+  }
+}
+
+// Modal styles
+.history-modal,
+.compare-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($text-primary, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+
+  .history-modal-content,
+  .compare-modal-content {
+    background: $white;
+    padding: 2.5rem;
+    border-radius: 24px;
+    width: 95%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba($text-primary, 0.2);
+    position: relative;
+    animation: slideUp 0.5s ease-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(to right, $primary, $accent);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .history-modal-header,
+    .compare-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba($primary, 0.1);
+
+      h3 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: $text-primary;
+        font-family: "Playfair Display", serif;
+        position: relative;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 40px;
+          height: 3px;
+          background: linear-gradient(to right, $primary, $accent);
+          border-radius: 3px;
+        }
+      }
+
+      button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: $text-secondary;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: rgba($error, 0.1);
+          color: $error;
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .history-modal-body,
+    .compare-modal-body {
+      .no-data-message {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: $text-secondary;
+        background: rgba($primary, 0.05);
+        border-radius: 16px;
+        font-size: 1.1rem;
+        border: 1px dashed rgba($primary, 0.2);
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+
+      .ant-table-wrapper {
+        .ant-table {
+          background: $white;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 5px 15px rgba($primary, 0.05);
+
+          th {
+            background: rgba($primary, 0.08) !important;
+            color: $text-primary;
+            font-weight: 600;
+            padding: 1.2rem 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba($primary, 0.1);
+
+            &:first-child {
+              border-top-left-radius: 16px;
+            }
+
+            &:last-child {
+              border-top-right-radius: 16px;
+            }
+          }
+
+          td {
+            padding: 1.2rem 1rem;
+            font-size: 0.95rem;
+            color: $text-secondary;
+            border-bottom: 1px solid rgba($primary, 0.08);
+            transition: all 0.3s ease;
+
+            &:first-child {
+              font-weight: 600;
+              color: $primary;
+            }
+          }
+
+          tr {
+            transition: all 0.3s ease;
+
+            &:hover {
+              td {
+                background: rgba($primary, 0.03) !important;
+              }
+            }
+
+            &:last-child {
+              td {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+
+        // Custom scrollbar
+        ::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: rgba($primary, 0.05);
+          border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: rgba($primary, 0.2);
+          border-radius: 4px;
+
+          &:hover {
+            background: rgba($primary, 0.3);
+          }
+        }
+      }
+
+      .comparison-chart {
+        background: $white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 5px 15px rgba($primary, 0.05);
+        border: 1px solid rgba($primary, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+          box-shadow: 0 8px 25px rgba($primary, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Input styles
+.age-input-container,
+.stat-content {
+  input {
+    width: 70px;
+    padding: 0.5rem;
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba($white, 0.9);
+    font-family: "Poppins", sans-serif;
+    color: $text-primary;
+    font-weight: 500;
+
+    &:focus {
+      outline: none;
+      border-color: $accent;
+      box-shadow: 0 0 0 2px rgba($accent, 0.2);
+      background: $white;
+      transform: translateY(-2px);
+    }
+
+    &:hover {
+      border-color: $accent;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    &::placeholder {
+      color: rgba($text-secondary, 0.6);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .pregnancy-monitor {
+    padding: 1.2rem 1rem;
+
+    .monitor-header {
+      margin-bottom: 1.5rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+    }
+
+    .monitor-content {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+
+      .children-grid {
+        order: 2;
+      }
+
+      .chart-section {
+        order: 1;
+        position: static;
+      }
+    }
+  }
+
+  .history-modal,
+  .compare-modal {
+    .history-modal-content,
+    .compare-modal-content {
+      padding: 1.5rem;
+      width: 95%;
+      max-height: 90vh;
+
+      .history-modal-header,
+      .compare-modal-header {
+        h3 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .age-input-container,
+  .stat-content {
+    input {
+      width: 70px;
+    }
+  }
+}

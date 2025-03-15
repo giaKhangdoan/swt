@@ -1,0 +1,169 @@
+.payment-result-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.payment-result {
+  width: 100%;
+  max-width: 600px;
+
+  .payment-status {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &.loading {
+      .status-icon {
+        color: #1890ff;
+      }
+    }
+
+    .status-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+
+      i {
+        &.fa-spinner {
+          animation: spin 1s linear infinite;
+        }
+        &.fa-check-circle {
+          color: #52c41a;
+        }
+        &.fa-times-circle {
+          color: #ff4d4f;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #262626;
+    }
+
+    h3 {
+      font-size: 18px;
+      color: #262626;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .payment-details {
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 20px 0;
+      text-align: left;
+
+      .detail-group {
+        display: grid;
+        gap: 16px;
+
+        .detail-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 8px;
+          border-bottom: 1px dashed #e8e8e8;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          label {
+            color: #8c8c8c;
+            font-size: 14px;
+          }
+
+          span {
+            font-size: 14px;
+            color: #262626;
+
+            &.amount {
+              color: #389e0d;
+              font-weight: bold;
+              font-size: 16px;
+            }
+
+            &.transaction {
+              font-family: monospace;
+              background: #f0f0f0;
+              padding: 4px 8px;
+              border-radius: 4px;
+            }
+
+            &.membership {
+              color: #1890ff;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
+    .message {
+      font-size: 16px;
+      color: #595959;
+      margin: 24px 0;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+
+      button {
+        min-width: 150px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 0 24px;
+        transition: all 0.3s ease;
+
+        &.home-button {
+          background-color: #1890ff;
+          color: white;
+
+          &:hover {
+            background-color: #40a9ff;
+          }
+
+          &:active {
+            background-color: #096dd9;
+          }
+        }
+
+        &.retry-button {
+          background-color: #ffffff;
+          color: #ff4d4f;
+          border: 1px solid #ff4d4f;
+
+          &:hover {
+            background-color: #fff1f0;
+          }
+
+          &:active {
+            background-color: #ffccc7;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 
