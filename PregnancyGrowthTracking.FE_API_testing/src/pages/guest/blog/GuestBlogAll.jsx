@@ -5,7 +5,7 @@ import "./GuestBlogAll.scss";
 import blogService from "../../../api/services/blogService";
 
 const BLOGS_PER_PAGE = 6;
-const BLOG_API_URL = "https://pregnancy-growth-tracking-web-app-ctc4dfa7bqgjhpdd.australiasoutheast-01.azurewebsites.net/api/Blog";
+const BLOG_API_URL = "https://pregnancy-growth-tracking-web-api-a6hxfqhsenaagthw.australiasoutheast-01.azurewebsites.net/api/Blog";
 
 const GuestBlogAll = () => {
   const [{ blogs, filteredBlogs, availableCategories, loading, error }, setBlogState] = useState({

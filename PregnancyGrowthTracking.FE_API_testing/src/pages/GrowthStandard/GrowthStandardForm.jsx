@@ -50,8 +50,8 @@ const GrowthStandardForm = ({ open, onClose, editData }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      const url = 'https://pregnancy-growth-tracking-web-app-ctc4dfa7bqgjhpdd.australiasoutheast-01.azurewebsites.net/api/GrowthStandard';
+        const token = localStorage.getItem('token');
+        const url = 'https://pregnancy-growth-tracking-web-api-a6hxfqhsenaagthw.australiasoutheast-01.azurewebsites.net/api/GrowthStandard';
       const method = editData ? 'PUT' : 'POST';
 
       const response = await fetch(url, {

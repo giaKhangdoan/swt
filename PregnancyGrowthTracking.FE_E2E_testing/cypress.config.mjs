@@ -13,6 +13,6 @@ export default defineConfig({
     defaultCommandTimeout: 10000,
   },
   env: {
-    apiUrl: 'https://pregnancy-growth-tracking-web-app-ctc4dfa7bqgjhpdd.australiasoutheast-01.azurewebsites.net/api'
+    apiUrl: 'https://pregnancy-growth-tracking-web-api-a6hxfqhsenaagthw.australiasoutheast-01.azurewebsites.net/api'
   }
 }) 

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './PaymentResult.scss';
 
-const API_URL = 'https://pregnancy-growth-tracking-web-app-ctc4dfa7bqgjhpdd.australiasoutheast-01.azurewebsites.net';
+const API_URL = 'https://pregnancy-growth-tracking-web-api-a6hxfqhsenaagthw.australiasoutheast-01.azurewebsites.net';
 
 const PaymentResultCard = ({ onBackHome, onRetry }) => {
   const [loading, setLoading] = useState(true);

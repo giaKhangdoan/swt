@@ -17,7 +17,7 @@ import blogService from "../../../api/services/blogService";
 import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
-const API_URL = "https://pregnancy-growth-tracking-web-app-ctc4dfa7bqgjhpdd.australiasoutheast-01.azurewebsites.net/api/Blog";
+const API_URL = "https://pregnancy-growth-tracking-web-api-a6hxfqhsenaagthw.australiasoutheast-01.azurewebsites.net/api/Blog";
 
 const AVAILABLE_CATEGORIES = [
   "french", "fiction", "english", "history", "magical",
